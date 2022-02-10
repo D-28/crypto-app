@@ -1,14 +1,11 @@
-import Footer from "../components/Footer";
+import { Box, Paper, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <>
-      <div>
-        <main>
-          <h1>Crypto App</h1>
-        </main>
-      </div>
-      <Footer />
-    </>
+    <Paper>
+      <Box>
+        <Typography>Crypto App</Typography>
+      </Box>
+    </Paper>
   );
 }

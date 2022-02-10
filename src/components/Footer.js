@@ -1,12 +1,10 @@
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer>
-      Powered by the{" "}
+    <span>
+      Powered by{" "}
       <a href="https://thegraph.com/hosted-service/subgraph/uniswap/uniswap-v2">
         Uniswap V2 Subgraph
       </a>
-    </footer>
+    </span>
   );
-};
-
-export default Footer;
+}
