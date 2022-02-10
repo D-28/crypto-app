@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_TOTAL_LIQUIDITY_USD = gql`
+export const GET_TOP_TOKENS = gql`
   {
     tokens(
       where: { name_not_contains: "You don't blacklist delta.financial" }
@@ -13,6 +13,7 @@ export const GET_TOTAL_LIQUIDITY_USD = gql`
       id
       tradeVolumeUSD
       totalLiquidity
+      totalSupply
     }
   }
 `;
