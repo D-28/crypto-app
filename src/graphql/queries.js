@@ -28,6 +28,10 @@ export const GET_DAILY_TOKEN = gql`
     ) {
       date
       totalLiquidityUSD
+      priceUSD
+      token {
+        symbol
+      }
     }
   }
 `;
