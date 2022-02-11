@@ -87,10 +87,14 @@ export default function Chart(props) {
     amount: Number(daily.totalLiquidityUSD).toFixed(2),
   }));
 
-  const chartM = data.tokenDayDatas.map((daily, i) => ({
-    date: getMonthFromDate(daily.date),
-    amount: Number(daily.totalLiquidityUSD).toFixed(2),
-  }));
+  // const chartM = aggregateMonthlyIntervals(data.tokenDayDatas);
+
+  const chartM = aggregateMonthlyIntervals(data.tokenDayDatas).map(
+    (daily, i) => ({
+      date: daily.Month,
+      amount: daily.totalLiquidityUSD.toFixed(2),
+    })
+  );
 
   console.log(aggregateMonthlyIntervals(data.tokenDayDatas));
 

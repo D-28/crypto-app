@@ -49,15 +49,13 @@ export const aggregateMonthlyIntervals = (data) => {
   ];
 
   var map_result = _.map(data, function (item) {
-    // console.log(item);
-    var d = new Date(new Number(item.date));
+    var d = new Date(new Number(item.date * 1000));
     var month = monthNames[d.getMonth()] + ", " + d.getFullYear();
     return {
       Month: month,
       totalLiquidityUSD: Number(item.totalLiquidityUSD),
     };
   });
-
   var result_temp = _.reduce(
     map_result,
     function (memo, item) {
@@ -70,8 +68,6 @@ export const aggregateMonthlyIntervals = (data) => {
     },
     {}
   );
-
-  //then wrap the result to the format you expected.
   var result = _.map(result_temp, function (value, key) {
     return {
       Month: key,
