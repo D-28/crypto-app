@@ -17,3 +17,17 @@ export const GET_TOP_TOKENS = gql`
     }
   }
 `;
+
+export const GET_DAILY_TOKEN = gql`
+  query TokenDayDatas($tokenId: String!) {
+    tokenDayDatas(
+      where: { token: $tokenId }
+      first: 365
+      orderBy: date
+      orderDirection: desc
+    ) {
+      date
+      totalLiquidityUSD
+    }
+  }
+`;
