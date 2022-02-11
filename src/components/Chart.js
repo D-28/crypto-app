@@ -11,13 +11,11 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from "recharts";
 import { GET_DAILY_TOKEN } from "../graphql/queries";
 import {
-  formatDate,
-  getMonthFromDate,
-  aggregateMonthlyIntervals,
+  aggregateMonthlyIntervals, formatDate
 } from "../utils/format";
 import Title from "./Title";
 
@@ -95,8 +93,6 @@ export default function Chart(props) {
       amount: daily.totalLiquidityUSD.toFixed(2),
     })
   );
-
-  console.log(aggregateMonthlyIntervals(data.tokenDayDatas));
 
   return (
     <>
