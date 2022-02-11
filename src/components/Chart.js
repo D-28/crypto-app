@@ -111,7 +111,7 @@ export default function Chart(props) {
         <LineChart
           data={chartInterval || chartD}
           margin={{
-            top: 26,
+            top: 86,
             right: 16,
             bottom: 0,
             left: 24,
