@@ -14,7 +14,11 @@ import {
   YAxis,
 } from "recharts";
 import { GET_DAILY_TOKEN } from "../graphql/queries";
-import { formatDate, getMonthFromDate } from "../utils/format";
+import {
+  formatDate,
+  getMonthFromDate,
+  aggregateMonthlyIntervals,
+} from "../utils/format";
 import Title from "./Title";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -88,6 +92,8 @@ export default function Chart(props) {
     amount: Number(daily.totalLiquidityUSD).toFixed(2),
   }));
 
+  console.log(aggregateMonthlyIntervals(data.tokenDayDatas));
+
   return (
     <>
       <Title>Total Liquidity ($)</Title>
@@ -95,7 +101,6 @@ export default function Chart(props) {
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>Daily</Typography>
           <AntSwitch
-            defaultChecked
             inputProps={{ "aria-label": "ant design" }}
             onChange={(event) =>
               setChartInterval(event.target.checked ? chartM : chartD)
@@ -106,7 +111,7 @@ export default function Chart(props) {
       </FormGroup>
       <ResponsiveContainer>
         <LineChart
-          data={chartInterval}
+          data={chartInterval || chartD}
           margin={{
             top: 86,
             right: 16,

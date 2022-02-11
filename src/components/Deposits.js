@@ -27,8 +27,6 @@ export default function Deposits(props) {
     return <p>Something went wrong!</p>;
   }
 
-  console.log(data.tokenDayDatas[0]);
-
   return (
     <>
       <Title>{data.tokenDayDatas[0].token.symbol}</Title>
