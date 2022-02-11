@@ -11,12 +11,10 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 import { GET_DAILY_TOKEN } from "../graphql/queries";
-import {
-  aggregateMonthlyIntervals, formatDate
-} from "../utils/format";
+import { aggregateMonthlyIntervals, formatDate } from "../utils/format";
 import Title from "./Title";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -113,7 +111,7 @@ export default function Chart(props) {
         <LineChart
           data={chartInterval || chartD}
           margin={{
-            top: 86,
+            top: 26,
             right: 16,
             bottom: 0,
             left: 24,
