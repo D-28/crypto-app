@@ -23,6 +23,7 @@ export default function Tokens(props) {
     console.error(error);
     return <p>Something went wrong!</p>;
   }
+  console.log("$", data);
 
   return (
     <>
@@ -48,7 +49,7 @@ export default function Tokens(props) {
               <TableCell component="th" scope="row">
                 {++i}
               </TableCell>
-              <TableCell align="left">{row.name}</TableCell>
+              <TableCell align="left">{row.symbol}</TableCell>
               <TableCell align="right">
                 {formatNumber(row.tradeVolumeUSD)}
               </TableCell>
