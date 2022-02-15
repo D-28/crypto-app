@@ -8,20 +8,11 @@ import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 import { useQuery } from "@apollo/client";
 import { GET_TOP_TOKENS } from "../graphql/queries";
+import { formatNumber } from "../utils/format";
 
 function preventDefault(event) {
   event.preventDefault();
 }
-
-const formatNumber = (stringNumber) => {
-  return (
-    "$" +
-    Number(stringNumber)
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  );
-};
 
 export default function Tokens(props) {
   const { selectedToken, setSelectedToken } = props;

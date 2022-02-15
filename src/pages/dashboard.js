@@ -5,7 +5,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
@@ -19,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
-import { mainListItems, secondaryListItems } from "../components/ListItems";
+import ListItems from "../components/ListItems";
 import Tokens from "../components/Tokens";
 
 function Copyright(props) {
@@ -102,7 +101,6 @@ function DashboardContent() {
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
-        <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
@@ -152,9 +150,8 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <ListItems />
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
         <Box

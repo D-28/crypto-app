@@ -14,6 +14,21 @@ export const formatDate = (epoch) => {
   return new Date(epoch * 1000).toLocaleString().split(",")[0];
 };
 
+export const sortDates = (entries) => {
+  let curYear = [];
+  let prevYear = [];
+
+  for (let entry of entries) {
+    if (entry["date"].endsWith("2022")) {
+      curYear.push(entry);
+    } else {
+      prevYear.push(entry);
+    }
+  }
+
+  return [...prevYear.reverse(), ...curYear.reverse()];
+};
+
 export const aggregateMonthlyIntervals = (data) => {
   var monthNames = [
     "January",
@@ -56,5 +71,6 @@ export const aggregateMonthlyIntervals = (data) => {
       totalLiquidityUSD: value,
     };
   });
+
   return result;
 };

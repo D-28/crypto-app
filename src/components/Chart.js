@@ -14,7 +14,11 @@ import {
   YAxis,
 } from "recharts";
 import { GET_DAILY_TOKEN } from "../graphql/queries";
-import { aggregateMonthlyIntervals, formatDate } from "../utils/format";
+import {
+  aggregateMonthlyIntervals,
+  formatDate,
+  sortDates,
+} from "../utils/format";
 import Title from "./Title";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -78,16 +82,18 @@ export default function Chart(props) {
     return <p>Something went wrong!</p>;
   }
 
-  const chartD = data.tokenDayDatas.map((daily, i) => ({
-    date: formatDate(daily.date),
-    amount: Number(daily.totalLiquidityUSD).toFixed(2),
-  }));
+  const chartD = sortDates(
+    data.tokenDayDatas.map((daily, i) => ({
+      date: formatDate(daily.date),
+      amount: Number(daily.totalLiquidityUSD).toFixed(2),
+    }))
+  );
 
-  const chartM = aggregateMonthlyIntervals(data.tokenDayDatas).map(
-    (daily, i) => ({
+  const chartM = sortDates(
+    aggregateMonthlyIntervals(data.tokenDayDatas).map((daily, i) => ({
       date: daily.Month,
       amount: daily.totalLiquidityUSD.toFixed(2),
-    })
+    }))
   );
 
   return (
