@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Line,
   LineChart,
@@ -70,11 +70,18 @@ export default function Chart(props) {
   const theme = useTheme();
   const [chartInterval, setChartInterval] = useState(null);
 
-  const { loading, error, data } = useQuery(GET_DAILY_TOKEN, {
+  const { loading, error, data, refetch } = useQuery(GET_DAILY_TOKEN, {
     variables: {
       tokenId: selectedToken,
     },
   });
+
+  const prevSelectedRef = useRef();
+  useEffect(() => {
+    refetch();
+    prevSelectedRef.current = selectedToken;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedToken]);
 
   if (loading) return <p>Loading ...</p>;
   if (error) {
@@ -82,14 +89,14 @@ export default function Chart(props) {
     return <p>Something went wrong!</p>;
   }
 
-  const chartD = sortDates(
+  const dailyChart = sortDates(
     data.tokenDayDatas.map((daily, i) => ({
       date: formatDate(daily.date),
       amount: Number(daily.totalLiquidityUSD).toFixed(2),
     }))
   );
 
-  const chartM = sortDates(
+  const monthlyChart = sortDates(
     aggregateMonthlyIntervals(data.tokenDayDatas).map((daily, i) => ({
       date: daily.Month,
       amount: daily.totalLiquidityUSD.toFixed(2),
@@ -104,16 +111,19 @@ export default function Chart(props) {
           <Typography>Daily</Typography>
           <AntSwitch
             inputProps={{ "aria-label": "ant design" }}
-            onChange={(event) =>
-              setChartInterval(event.target.checked ? chartM : chartD)
-            }
+            onChange={(event) => {
+              refetch();
+              setChartInterval(
+                event.target.checked ? monthlyChart : dailyChart
+              );
+            }}
           />
           <Typography>Monthly</Typography>
         </Stack>
       </FormGroup>
       <ResponsiveContainer>
         <LineChart
-          data={chartInterval || chartD}
+          data={chartInterval ?? dailyChart}
           margin={{
             top: 86,
             right: 16,
